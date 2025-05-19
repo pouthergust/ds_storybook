@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   StyleSheet,
 } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 
 const Checkbox = ({ label, checked, disabled, variant, onChange }) => {
   const getIcon = () => {
@@ -13,7 +14,12 @@ const Checkbox = ({ label, checked, disabled, variant, onChange }) => {
 
     switch (variant) {
       case 'check':
-        return '✓';
+        return (
+          <Ionicons
+            name='checkmark'
+            color="#fff"
+          />
+        );
       case 'dash':
         return '−';
       default:

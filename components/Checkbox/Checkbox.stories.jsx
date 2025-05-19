@@ -44,7 +44,7 @@ const meta = {
 export default meta;
 
 // Estado Padrão - Vazio
-export const DefaultEmpty = {
+export const Empty = {
   args: {
     label: 'Label',
     variant: 'empty',
@@ -52,7 +52,7 @@ export const DefaultEmpty = {
 };
 
 // Estado Padrão - Check
-export const DefaultCheck = {
+export const Checked = {
   args: {
     label: 'Label',
     variant: 'check',
@@ -61,94 +61,10 @@ export const DefaultCheck = {
 };
 
 // Estado Padrão - Traço
-export const DefaultDash = {
+export const Dashed = {
   args: {
     label: 'Label',
     variant: 'dash',
     checked: true,
-  },
-};
-
-// Estado Hover - Vazio
-export const HoverEmpty = {
-  args: {
-    ...DefaultEmpty.args,
-  },
-  parameters: {
-    pseudo: { hover: true },
-  },
-};
-
-// Estado Hover - Check
-export const HoverCheck = {
-  args: {
-    ...DefaultCheck.args,
-  },
-  parameters: {
-    pseudo: { hover: true },
-  },
-};
-
-// Estado Hover - Traço
-export const HoverDash = {
-  args: {
-    ...DefaultDash.args,
-  },
-  parameters: {
-    pseudo: { hover: true },
-  },
-};
-
-// Estado Focus - Vazio
-export const FocusEmpty = {
-  args: {
-    ...DefaultEmpty.args,
-  },
-  parameters: {
-    pseudo: { focus: true },
-  },
-};
-
-// Estado Focus - Check
-export const FocusCheck = {
-  args: {
-    ...DefaultCheck.args,
-  },
-  parameters: {
-    pseudo: { focus: true },
-  },
-};
-
-// Estado Focus - Traço
-export const FocusDash = {
-  args: {
-    ...DefaultDash.args,
-  },
-  parameters: {
-    pseudo: { focus: true },
-  },
-};
-
-// Estado Desabilitado - Vazio
-export const DisabledEmpty = {
-  args: {
-    ...DefaultEmpty.args,
-    disabled: true,
-  },
-};
-
-// Estado Desabilitado - Check
-export const DisabledCheck = {
-  args: {
-    ...DefaultCheck.args,
-    disabled: true,
-  },
-};
-
-// Estado Desabilitado - Traço
-export const DisabledDash = {
-  args: {
-    ...DefaultDash.args,
-    disabled: true,
   },
 };

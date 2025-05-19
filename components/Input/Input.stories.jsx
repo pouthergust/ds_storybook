@@ -60,14 +60,14 @@ export const Default = {
 };
 
 // Estado Hover
-export const Hover = {
-  args: {
-    ...Default.args,
-  },
-  parameters: {
-    pseudo: { hover: true },
-  },
-};
+// export const Hover = {
+//   args: {
+//     ...Default.args,
+//   },
+//   parameters: {
+//     pseudo: { hover: true },
+//   },
+// };
 
 // Estado com Foco
 export const Focus = {

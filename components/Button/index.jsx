@@ -37,12 +37,14 @@ const Button = ({
       disabled: [styles.containerDisabled, styles.labelDisabled],
     },
     outlined: {
-      active: styles.containerOutlined,
-      color: styles.labelOutline
+      active: styles[inverseStyle ? 'containerInverseOutline' : 'containerOutlined'],
+      color: styles[inverseStyle ? 'labelInverseOutlined' : 'labelOutline'],
+      disabled: [styles.containerOutlinedDisabled, styles.labelOutlineDisabled],
     },
     transparent: {
       active: styles.containerTertiary,
-      color: styles.labelTertiary
+      color: styles[inverseStyle ? 'labelInverseOutlined' : 'labelOutline'],
+      disabled: styles.containerTransparentDisabled,
     },
   }
 
@@ -66,23 +68,8 @@ const Button = ({
   const getLabelStyle = () => {
     const baseStyle = [styles.label];
 
-    // Estilo inverso
-    if (inverseStyle) {
-      // baseStyle.push(styles.labelInverse)
-      // baseStyle.push(styles.containerInverse);
-    };
-
-    // Variante
-    // if (variant === 'filled') baseStyle.push(styles.label);
-    if (variant === 'outline') baseStyle.push(styles.labelOutline);
-    if (variant === 'tertiary') baseStyle.push(styles.labelTertiary);
-
     // Variante
     baseStyle.push(variantOptions[variant].color);
-    // if (variant === 'inverse') baseStyle.push(styles.containerInverse);
-    // if (variant === 'outline') baseStyle.push(styles[!inverseStyle ? "labelOutline" : "labelInverseOutlined"]);
-    // if (variant === 'outline' && isFocused) baseStyle.push(styles.labelLight);
-    // if (variant === 'tertiary') baseStyle.push(styles.containerTertiary);
 
     // Estado
     if (disabled) baseStyle.push(styles.labelDisabled);
@@ -106,8 +93,8 @@ const Button = ({
   const getIconColor = () => {
     if (disabled) return styles.labelDisabled.color;
     if (variant === 'filled') return inverseStyle ? styles.labelInverse.color : styles.label.color;
-    if (variant === 'outlined') return styles.labelOutline.color;
-    return styles.labelTertiary.color;
+
+    return inverseStyle ? styles.labelInverseOutlined.color : styles.labelOutline.color;
   };
 
   const renderIcon = () => {
@@ -154,29 +141,42 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  icon: {
-    paddingHorizontal: 8,
-  },
-  iconLeft: {
-    paddingLeft: 0,
-  },
-  iconRight: {
-    paddingRight: 0,
-  },
-  iconOnlyContainer: {
-    padding: 0,
-    aspectRatio: 1,
-  },
   container: {
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: 8,
+    borderWidth: 2,
+    borderColor: '#4F7CFE',
     backgroundColor: '#4F7CFE',
+  },
+  containerInverse: {
+    backgroundColor: '#E2FF66',
+  },
+  containerDisabled: {
+    backgroundColor: '#F5F5F5',
   },
   containerOutlined: {
     backgroundColor: 'transparent',
     borderWidth: 2,
     borderColor: '#2A4FDA',
+  },
+  
+  containerInverseOutline: {
+    backgroundColor: 'transparent',
+    borderWidth: 1,
+    borderColor: '#E2FF66',
+  },
+  containerOutlinedDisabled: {
+    backgroundColor: 'transparent',
+    borderColor: '#C0C9E5',
+  },
+  containerTransparentDisabled: {
+    backgroundColor: 'transparent',
+    borderColor: 'transparent',
+    color: '#96A1C1',
+  },
+  containerFocused: {
+    borderColor: '#2B5AE3',
   },
   containerLarge: {
     height: 56,
@@ -190,24 +190,18 @@ const styles = StyleSheet.create({
     height: 32,
     paddingHorizontal: 12,
   },
-  containerInverse: {
-    backgroundColor: '#E2FF66',
+  icon: {
+    paddingHorizontal: 8,
   },
-  containerInverseOutline: {
-    backgroundColor: 'transparent',
-    borderWidth: 1,
-    borderColor: '#E2FF66',
+  iconLeft: {
+    paddingLeft: 0,
   },
-  containerFocused: {
-    borderColor: '#2B5AE3',
+  iconRight: {
+    paddingRight: 0,
   },
-  containerDisabled: {
-    backgroundColor: '#F5F5F5',
-    borderColor: '#F5F5F5',
-  },
-  containerDisabled: {
-    backgroundColor: '#F5F5F5',
-    borderColor: '#F5F5F5',
+  iconOnlyContainer: {
+    padding: 0,
+    aspectRatio: 1,
   },
   label: {
     fontSize: 14,
@@ -225,6 +219,9 @@ const styles = StyleSheet.create({
   },
   labelOutline: {
     color: '#4F7CFE',
+  },
+  labelOutlineDisabled: {
+    color: '#C0C9E5',
   },
   labelDisabled: {
     color: '#BFBFBF',

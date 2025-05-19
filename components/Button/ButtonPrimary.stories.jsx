@@ -18,6 +18,10 @@ const meta = {
         {
           name: "light",
           value: "#f4f4f4"
+        },
+        {
+          name: "dark",
+          value: "#081032"
         }
       ]
     }
@@ -76,6 +80,8 @@ export const Secundary = {
     label: "Label",
     size: "large",
     variant: "outlined",
+    iconName: "home-outline",
+    iconPosition: "both",
   },
 };
 
@@ -85,5 +91,7 @@ export const Tertiary = {
     label: "Label",
     size: "large",
     variant: "transparent",
+    iconName: "home-outline",
+    iconPosition: "both",
   },
 };
