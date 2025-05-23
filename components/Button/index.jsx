@@ -173,7 +173,6 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderColor: '#2A4FDA',
   },
-  
   containerInverseOutline: {
     borderWidth: 1,
     borderColor: '#E2FF66',
