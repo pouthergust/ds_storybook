@@ -32,19 +32,29 @@ const Button = ({
 
   const variantOptions = {
     filled: {
-      active: styles[inverseStyle ? 'containerInverse' : 'containerLarge'],
+      active: styles[inverseStyle ? 'containerInverse' : 'containerFilled'],
       color: styles[inverseStyle ? 'labelInverse' : 'label'],
       disabled: [styles.containerDisabled, styles.labelDisabled],
+      focused: styles.containerFocused, 
     },
     outlined: {
       active: styles[inverseStyle ? 'containerInverseOutline' : 'containerOutlined'],
       color: styles[inverseStyle ? 'labelInverseOutlined' : 'labelOutline'],
       disabled: [styles.containerOutlinedDisabled, styles.labelOutlineDisabled],
+      focused: [
+        styles[inverseStyle ? 'containerInverseFocused' : 'containerOutlineFocused'],
+        styles.containerFocused, 
+      ], 
     },
     transparent: {
       active: styles.containerTertiary,
       color: styles[inverseStyle ? 'labelInverseOutlined' : 'labelOutline'],
       disabled: styles.containerTransparentDisabled,
+      focused: [
+        styles.containerTransparentFocused, 
+        styles[inverseStyle ? 'containerInverseFocused' :'containerOutlineFocused'],
+        styles.containerFocused
+      ]
     },
   }
 
@@ -60,7 +70,7 @@ const Button = ({
 
     // Estado
     // if (disabled) baseStyle.push(styles.containerDisabled);
-    if (isFocused && !disabled) baseStyle.push(styles.containerFocused);
+    if (isFocused && !disabled) baseStyle.push(variantOptions[variant].focused);
     
     return baseStyle;
   };
@@ -146,28 +156,29 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     borderRadius: 8,
     borderWidth: 2,
+  },
+  containerFilled: {
     borderColor: '#4F7CFE',
     backgroundColor: '#4F7CFE',
   },
   containerInverse: {
+    borderColor: '#E2FF66',
     backgroundColor: '#E2FF66',
   },
   containerDisabled: {
     backgroundColor: '#F5F5F5',
+    border: 'none',
   },
   containerOutlined: {
-    backgroundColor: 'transparent',
     borderWidth: 2,
     borderColor: '#2A4FDA',
   },
   
   containerInverseOutline: {
-    backgroundColor: 'transparent',
     borderWidth: 1,
     borderColor: '#E2FF66',
   },
   containerOutlinedDisabled: {
-    backgroundColor: 'transparent',
     borderColor: '#C0C9E5',
   },
   containerTransparentDisabled: {
@@ -176,7 +187,15 @@ const styles = StyleSheet.create({
     color: '#96A1C1',
   },
   containerFocused: {
-    borderColor: '#2B5AE3',
+    outlineWidth: 4,
+    outlineStyle: "solid",
+    borderColor: '#6684FF',
+  },
+  containerOutlineFocused: {
+    backgroundColor: '#E3E9FF',
+  },  
+  containerTransparentFocused: {
+    borderColor: '#6684FF',
   },
   containerLarge: {
     height: 56,
@@ -212,7 +231,7 @@ const styles = StyleSheet.create({
     color: '#FFFFFF',
   },
   labelInverse: {
-    color: '#000000',
+    color: '#4F7CFE',
   },
   labelInverseOutlined: {
     color: '#E2FF66',
@@ -235,6 +254,9 @@ const styles = StyleSheet.create({
   },
   labelInverseTertiary: {
     color: '#E7F79E',
+  },
+  containerInverseFocused: {
+    borderColor: '#E7F79E',
   },
 });
 
