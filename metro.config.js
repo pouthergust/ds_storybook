@@ -1,17 +1,21 @@
-/**
- * Metro configuration for React Native
- * https://github.com/facebook/react-native
- *
- * @format
- */
+const { getDefaultConfig, mergeConfig } = require("@react-native/metro-config");
+const path = require("path");
+const withStorybook = require('@storybook/react-native/metro/withStorybook');
 
-module.exports = {
-  transformer: {
-    getTransformOptions: async () => ({
-      transform: {
-        experimentalImportSupport: false,
-        inlineRequires: true,
-      },
-    }),
-  },
-};
+const defaultConfig = getDefaultConfig(__dirname);
+
+/**
+ * Metro configuration
+ * https://facebook.github.io/metro/docs/configuration
+ *
+ * @type {import('@react-native/metro-config').MetroConfig}
+ */
+const config = {};
+
+const finalConfig = mergeConfig(defaultConfig, config);
+
+module.exports = withStorybook(finalConfig, {
+    enabled: process.env.STORYBOOK_ENABLED === 'true',
+    onDisabledRemoveStorybook: true,
+    configPath: path.resolve(__dirname, './.rnstorybook'),
+});
