@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { View, Text, TextInput, StyleSheet } from 'react-native';
-// import { Ionicons } from '@expo/vector-icons';
+import Icon from '../Icon';
 
 const Input = ({
   label,
@@ -18,7 +18,7 @@ const Input = ({
   const [isFilled, setIsFilled] = useState(false);
 
   // Funções de máscara
-  const applyMask = (text, type) => {
+  const applyMask = useCallback((text, type) => {
     if (!mask || !type) return text;
     
     // Remove tudo que não é número
@@ -38,7 +38,7 @@ const Input = ({
       default:
         return text;
     }
-  };
+  }, [mask])
 
   const maskCPF = (value) => {
     if (value.length <= 11) {
@@ -174,13 +174,13 @@ const Input = ({
     return styles.supportText;
   };
 
-  const getIcon = () => {
-    // Implementar quando os ícones estiverem disponíveis
-    // if (error) return <Ionicons name="close-circle" size={20} color="#FF4D4F" />;
-    // if (success) return <Ionicons name="checkmark-circle" size={20} color="#52C41A" />;
-    // return <Ionicons name="information-circle" size={20} color="#4F7CFE" />;
-    return null;
-  };
+  // const getIcon = () => {
+  //   // Implementar quando os ícones estiverem disponíveis
+  //   if (error) return ;
+  //   if (success) return <Icon name="checkmark-circle" size={20} color="#52C41A" />;
+  //   return <Icon name="information-line" size={20} color="#687499" />;
+  //   return null;
+  // };
 
   return (
     <View style={styles.wrapper}>
@@ -197,7 +197,9 @@ const Input = ({
           keyboardType={getKeyboardType()}
           maxLength={getMaxLength()}
         />
-        {/* {getIcon()} */}
+        {!disabled && <Icon name="information-line" size={20} color="#687499" />}
+        {error && <Icon name="close-line" size={20} color="#FF4D4F" />}
+        {success && <Icon name="check-line" size={20} color="#52C41A" />}
       </View>
       {supportText && <Text style={getSupportTextStyle()}>{supportText}</Text>}
     </View>
