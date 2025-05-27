@@ -69,7 +69,7 @@ export const Primary = {
     label: "Label",
     size: "large",
     variant: "filled",
-    iconName: "home-outline",
+    iconName: "home-line",
     iconPosition: "both",
   },
 };
@@ -80,7 +80,7 @@ export const Secundary = {
     label: "Label",
     size: "large",
     variant: "outlined",
-    iconName: "home-outline",
+    iconName: "home-line",
     iconPosition: "both",
   },
 };
@@ -91,7 +91,7 @@ export const Tertiary = {
     label: "Label",
     size: "large",
     variant: "transparent",
-    iconName: "home-outline",
+    iconName: "home-line",
     iconPosition: "both",
   },
 };

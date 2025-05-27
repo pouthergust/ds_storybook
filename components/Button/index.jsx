@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import { TouchableOpacity, Text, StyleSheet, View } from 'react-native';
-// import { Ionicons } from '@expo/vector-icons';
+import Icon from '../Icon';
 
 const Button = ({
   label,
@@ -109,14 +109,14 @@ const Button = ({
 
   const renderIcon = () => {
     if (!iconName) return null;
-    // return (
-    //   <Ionicons
-    //     name={iconName}
-    //     size={getIconSize()}
-    //     color={getIconColor()}
-    //     style={styles.icon}
-    //   />
-    // );
+    return (
+      <Icon
+        name={iconName}
+        size={getIconSize()}
+        color={getIconColor()}
+        style={styles.icon}
+      />
+    );
   };
 
   return (
@@ -126,7 +126,7 @@ const Button = ({
       disabled={disabled}
       onPressIn={() => setIsFocused(true)}
       onPressOut={() => setIsFocused(false)}
-      activeOpacity={0.8}
+      activeOpacity={0.95}
     >
       <View style={styles.contentContainer}>
         {(
@@ -158,8 +158,8 @@ const styles = StyleSheet.create({
     borderWidth: 2,
   },
   containerFilled: {
-    borderColor: '#4F7CFE',
-    backgroundColor: '#4F7CFE',
+    borderColor: '#193ABB',
+    backgroundColor: '#193ABB',
   },
   containerInverse: {
     borderColor: '#E2FF66',
@@ -167,7 +167,7 @@ const styles = StyleSheet.create({
   },
   containerDisabled: {
     backgroundColor: '#F5F5F5',
-    border: 'none',
+    borderColor: '#F5F5F5',
   },
   containerOutlined: {
     borderWidth: 2,
@@ -187,15 +187,16 @@ const styles = StyleSheet.create({
     color: '#96A1C1',
   },
   containerFocused: {
-    outlineWidth: 4,
+    outlineWidth: 2,
     outlineStyle: "solid",
-    borderColor: '#6684FF',
+    outlineColor: "#6684FF",
+    borderColor: '#193ABB',
   },
   containerOutlineFocused: {
     backgroundColor: '#E3E9FF',
   },  
   containerTransparentFocused: {
-    borderColor: '#6684FF',
+    borderColor: '#193ABB',
   },
   containerLarge: {
     height: 56,
@@ -210,7 +211,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
   },
   icon: {
-    paddingHorizontal: 8,
+    paddingHorizontal: 16,
   },
   iconLeft: {
     paddingLeft: 0,
