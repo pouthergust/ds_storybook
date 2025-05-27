@@ -6,20 +6,19 @@ import {
   TouchableOpacity,
   StyleSheet,
 } from 'react-native';
-// import { Ionicons } from '@expo/vector-icons';
+import Icon from '../Icon'
 
 const Checkbox = ({ label, checked, disabled, variant, onChange }) => {
   const getIcon = () => {
-    if (!checked) return null;
+    if (!checked || variant == 'empty') return null;
 
-    switch (variant) {
-      case 'check':
-        return "x";
-      case 'dash':
-        return '−';
-      default:
-        return null;
-    }
+    return (
+      <Icon
+        name={variant}
+        size={14}
+        color={disabled ? "#96A1C1" : "#FFF"}
+      />
+    )
   };
 
   return (
@@ -64,7 +63,7 @@ Checkbox.propTypes = {
   label: PropTypes.string,
   checked: PropTypes.bool,
   disabled: PropTypes.bool,
-  variant: PropTypes.oneOf(['empty', 'check', 'dash']),
+  variant: PropTypes.oneOf(['empty', 'check-line', 'subtract-line']),
   onChange: PropTypes.func,
 };
 
@@ -102,7 +101,7 @@ const styles = StyleSheet.create({
   },
   checkboxDisabled: {
     backgroundColor: '#F4F4F4',
-    borderColor: '#D1D1D1',
+    borderColor: '#96A1C1',
   },
   icon: {
     color: '#FFF',

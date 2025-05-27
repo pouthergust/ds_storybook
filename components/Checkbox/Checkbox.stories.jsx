@@ -32,7 +32,7 @@ const meta = {
     variant: {
       description: 'Variante do ícone',
       control: 'select',
-      options: ['empty', 'check', 'dash'],
+      options: ['empty', 'check-line', 'subtract-line'],
     },
     onChange: {
       description: 'Função chamada ao alterar estado',
@@ -55,7 +55,7 @@ export const Empty = {
 export const Checked = {
   args: {
     label: 'Label',
-    variant: 'check',
+    variant: 'check-line',
     checked: true,
   },
 };
@@ -64,7 +64,7 @@ export const Checked = {
 export const Dashed = {
   args: {
     label: 'Label',
-    variant: 'dash',
+    variant: 'subtract-line',
     checked: true,
   },
 };
