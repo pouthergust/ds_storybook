@@ -1,5 +1,7 @@
+import React from 'react';
 import { withBackgrounds } from "@storybook/addon-ondevice-backgrounds";
 import { Preview } from "@storybook/react";
+import { View } from "react-native";
 
 const preview: Preview = {
   parameters: {
@@ -19,7 +21,21 @@ const preview: Preview = {
       },
     },
   },
-  decorators: [withBackgrounds],
+  // decorators: [withBackgrounds],
+  decorators: [
+    (Story, { parameters }) => (
+      <View
+        style={{
+          flex: 1,
+          backgroundColor:
+            parameters.noBackground === true ? undefined : "#fff",
+          padding: 8,
+        }}
+      >
+        <Story />
+      </View>
+    ),
+  ],
 };
 
 export default preview;

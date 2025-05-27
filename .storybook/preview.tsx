@@ -1,4 +1,6 @@
+import React from 'react';
 import { Preview } from "@storybook/react";
+import { View } from "react-native";
 
 const preview: Preview = {
   parameters: {
@@ -10,6 +12,21 @@ const preview: Preview = {
       },
     },
   },
+
+  decorators: [
+    (Story, { parameters }) => (
+      <View
+        style={{
+          flex: 1,
+          backgroundColor:
+            parameters.noBackground === true ? undefined : "#fff",
+          padding: 8,
+        }}
+      >
+        <Story />
+      </View>
+    ),
+  ],
 };
 
 export default preview;
