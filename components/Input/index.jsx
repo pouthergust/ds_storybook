@@ -1,3 +1,4 @@
+
 import React, { useCallback, useState } from 'react';
 import { View, Text, TextInput, StyleSheet } from 'react-native';
 import Icon from '../Icon';
@@ -11,19 +12,30 @@ const Input = ({
   success,
   disabled,
   supportText,
-  mask, // Nova prop para tipo de máscara
-  maskType, // Tipo específico de máscara
+  mask,
+  maskType,
 }) => {
   const [isFocused, setIsFocused] = useState(false);
   const [isFilled, setIsFilled] = useState(false);
+  const [inputValue, setInputValue] = useState(value || '');
 
-  // Funções de máscara
+  const handleChangeText = (text) => {
+    let maskedText = text;
+
+    if (mask && maskType) {
+      maskedText = applyMask(text, maskType);
+    }
+
+    setInputValue(maskedText);
+    setIsFilled(maskedText.length > 0);
+    if (onChangeText) onChangeText(maskedText);
+  };
+
   const applyMask = useCallback((text, type) => {
-    if (!mask || !type) return text;
-    
-    // Remove tudo que não é número
+    if (!text || text.length === 0) return '';
+
     const numbers = text.replace(/\D/g, '');
-    
+
     switch (type) {
       case 'cpf':
         return maskCPF(numbers);
@@ -38,88 +50,54 @@ const Input = ({
       default:
         return text;
     }
-  }, [mask])
+  }, [mask, maskType]);
 
   const maskCPF = (value) => {
-    if (value.length <= 11) {
-      return value
-        .replace(/(\d{3})(\d)/, '$1.$2')
-        .replace(/(\d{3})(\d)/, '$1.$2')
-        .replace(/(\d{3})(\d{1,2})$/, '$1-$2');
-    }
-    return value.slice(0, 11)
+    return value
       .replace(/(\d{3})(\d)/, '$1.$2')
       .replace(/(\d{3})(\d)/, '$1.$2')
       .replace(/(\d{3})(\d{1,2})$/, '$1-$2');
   };
 
   const maskCEP = (value) => {
-    if (value.length <= 8) {
-      return value.replace(/(\d{5})(\d)/, '$1-$2');
-    }
-    return value.slice(0, 8).replace(/(\d{5})(\d)/, '$1-$2');
+    return value.replace(/(\d{5})(\d)/, '$1-$2');
   };
 
   const maskPhone = (value) => {
-    if (value.length <= 11) {
-      if (value.length <= 10) {
-        return value
-          .replace(/(\d{2})(\d)/, '($1) $2')
-          .replace(/(\d{4})(\d)/, '$1-$2');
-      } else {
-        return value
-          .replace(/(\d{2})(\d)/, '($1) $2')
-          .replace(/(\d{5})(\d)/, '$1-$2');
-      }
+    if (value.length <= 10) {
+      return value
+        .replace(/(\d{2})(\d)/, '($1) $2')
+        .replace(/(\d{4})(\d)/, '$1-$2');
+    } else {
+      return value
+        .replace(/(\d{2})(\d)/, '($1) $2')
+        .replace(/(\d{5})(\d)/, '$1-$2');
     }
-    return value.slice(0, 11)
-      .replace(/(\d{2})(\d)/, '($1) $2')
-      .replace(/(\d{5})(\d)/, '$1-$2');
   };
 
   const maskDate = (value) => {
-    if (value.length <= 8) {
-      return value
-        .replace(/(\d{2})(\d)/, '$1/$2')
-        .replace(/(\d{2})(\d)/, '$1/$2');
-    }
-    return value.slice(0, 8)
+    return value
       .replace(/(\d{2})(\d)/, '$1/$2')
       .replace(/(\d{2})(\d)/, '$1/$2');
   };
 
   const maskCurrency = (value) => {
     if (!value) return '';
-    
-    // Converte para número e divide por 100 para ter centavos
-    const numericValue = parseInt(value) / 100;
-    
+    const numericValue = parseInt(value, 10) / 100;
     return numericValue.toLocaleString('pt-BR', {
       style: 'currency',
       currency: 'BRL',
     });
   };
 
-  const handleChangeText = (text) => {
-    let maskedText = text;
-    
-    if (mask && maskType) {
-      maskedText = applyMask(text, maskType);
-    }
-    
-    setIsFilled(maskedText.length > 0);
-    if (onChangeText) onChangeText(maskedText);
-  };
-
   const getKeyboardType = () => {
     if (!mask || !maskType) return 'default';
-    
+
     switch (maskType) {
       case 'cpf':
       case 'cep':
       case 'phone':
       case 'currency':
-        return 'numeric';
       case 'date':
         return 'numeric';
       default:
@@ -129,18 +107,16 @@ const Input = ({
 
   const getMaxLength = () => {
     if (!mask || !maskType) return undefined;
-    
+
     switch (maskType) {
       case 'cpf':
-        return 14; // 000.000.000-00
+        return 14;
       case 'cep':
-        return 9;  // 00000-000
+        return 9;
       case 'phone':
-        return 15; // (00) 00000-0000
+        return 15;
       case 'date':
-        return 10; // 00/00/0000
-      case 'currency':
-        return undefined; // Sem limite para moeda
+        return 10;
       default:
         return undefined;
     }
@@ -174,14 +150,6 @@ const Input = ({
     return styles.supportText;
   };
 
-  // const getIcon = () => {
-  //   // Implementar quando os ícones estiverem disponíveis
-  //   if (error) return ;
-  //   if (success) return <Icon name="checkmark-circle" size={20} color="#52C41A" />;
-  //   return <Icon name="information-line" size={20} color="#687499" />;
-  //   return null;
-  // };
-
   return (
     <View style={styles.wrapper}>
       <Text style={getLabelStyle()}>{label}</Text>
@@ -189,7 +157,7 @@ const Input = ({
         <TextInput
           style={getInputStyle()}
           placeholder={placeholder}
-          value={value}
+          value={inputValue}
           onChangeText={handleChangeText}
           onFocus={() => setIsFocused(true)}
           onBlur={() => setIsFocused(false)}

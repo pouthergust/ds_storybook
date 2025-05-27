@@ -6950,6 +6950,11 @@ react-native-reanimated@^3.17.5:
     invariant "^2.2.4"
     react-native-is-edge-to-edge "1.1.7"
 
+react-native-remix-icon@^0.3.0:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/react-native-remix-icon/-/react-native-remix-icon-0.3.0.tgz#1b594dc7703f42eff9c016b3150764701d59ebd2"
+  integrity sha512-GKwada565yFZOh/6y9ssI8ykrQbWUyAmoayfezQt85sorKimh3vpJaJJy35874HMJUYnzkIyRTWL9OivxZMfXA==
+
 react-native-safe-area-context@^5.4.0:
   version "5.4.1"
   resolved "https://registry.yarnpkg.com/react-native-safe-area-context/-/react-native-safe-area-context-5.4.1.tgz#6d04eac20f99622fa13895fa7ae96199f1ecf800"
