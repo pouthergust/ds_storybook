@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Animated, LayoutAnimation, Platform, UIManager } from 'react-native';
-// import { Ionicons } from '@expo/vector-icons';
+import Icon from '../Icon';
 
 if (Platform.OS === 'android' && UIManager.setLayoutAnimationEnabledExperimental) {
   UIManager.setLayoutAnimationEnabledExperimental(true);
@@ -59,11 +59,11 @@ const Accordion = ({ title, content, nested = false, initiallyOpen = false }) =>
           {title}
         </Text>
         <Animated.View style={{ transform: [{ rotate: iconRotation }] }}>
-          {/* <Ionicons
-            name="chevron-down"
-            size={20}
-            color={isOpen && !nested ? '#FFFFFF' : '#4F7CFE'}
-          /> */}
+        <Icon 
+          name="arrow-up-s-line"
+          size={20}
+          color={isOpen &&!nested? '#FFFFFF' : '#4F7CFE'}
+        />
         </Animated.View>
       </TouchableOpacity>
 
