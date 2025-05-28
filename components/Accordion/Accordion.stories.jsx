@@ -1,16 +1,16 @@
 import { Text, View } from "react-native";
-import Accordeon from ".";
+import Accordion from ".";
 
 const meta = {
-    title: "Atom/Accordeon",
-    component: Accordeon,
+    title: "Atom/Accordion",
+    component: Accordion,
     render: (props) => (
-        <Accordeon 
+        <Accordion 
             {...props}
             content={
                 <View style={{ flexDirection: 'column' }}>
                     <Text>{props.content}</Text>
-                    <Accordeon 
+                    <Accordion 
                         nested
                         title="Item 01"
                         content={
