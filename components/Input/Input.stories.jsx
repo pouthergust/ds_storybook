@@ -209,6 +209,15 @@ export const MaskPhoneFilled = {
   },
 };
 
+export const MaskPhoneFilledError = {
+  args: {
+    ...MaskPhone.args,
+    value: "",
+    error: true,
+    supportText: "Número de telefone inválido",
+  },
+};
+
 // Máscara Data
 export const MaskDate = {
   args: {
@@ -234,6 +243,15 @@ export const MaskDateFilled = {
     value: "15/12/2023",
     success: true,
     supportText: "Data inserida corretamente",
+  },
+};
+
+export const MaskDateFilledError = {
+  args: {
+    ...MaskDate.args,
+    value: "15/12/2125",
+    error: true,
+    supportText: "Data inserida incorretamente",
   },
 };
 
